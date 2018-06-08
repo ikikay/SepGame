@@ -134,7 +134,7 @@ public class SepGame extends Canvas implements Runnable {
         } else if (gameState == STATE.Jeu) {
             hud.tick();
             //spawner.tick();
-            if (Hud.playerLifePourcent == 0) {                             
+            if (Hud.playerLifePourcent == 0) {
                 gameState = STATE.Fin;
                 handler.object.clear();
             }
@@ -151,14 +151,16 @@ public class SepGame extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH + 25, HEIGHT + 25);
-        try {
-            handler.render(g);
-        } catch (Exception e) {
-        }
+
         if ((gameState == STATE.Menu) || (gameState == STATE.Aide) || (gameState == STATE.Fin)) {
             menu.render(g);
         } else if (gameState == STATE.Jeu) {
             hud.render(g);
+        }
+
+        try {
+            handler.render(g);
+        } catch (Exception e) {
         }
 
         //Pour TESTS pour centre ecran
@@ -185,8 +187,8 @@ public class SepGame extends Canvas implements Runnable {
             return position;
         }
     }
-    
-    public static void resetGame(){
+
+    public static void resetGame() {
         Hud.level = 1;
         Hud.score = 0;
         Hud.playerLifePourcent = 100;

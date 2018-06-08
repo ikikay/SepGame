@@ -8,7 +8,6 @@ package sepgame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
-import java.awt.Rectangle;
 import java.util.Random;
 
 /**
@@ -27,35 +26,38 @@ public class Player extends GameObject {
 
     @Override
     public void tick() {
-        x += velX;
-        y += velY;
+        if (vitesse >= 2) {
+            vitesse = 2f;
+        }
 
         if (handler.isUp()) {
-            velY = -5;
+            velY = -5 * vitesse;
         } else if (!handler.isDown()) {
             velY = 0;
         }
 
         if (handler.isDown()) {
-            velY = 5;
+            velY = 5 * vitesse;
         } else if (!handler.isUp()) {
             velY = 0;
         }
 
         if (handler.isLeft()) {
-            velX = -5;
+            velX = -5 * vitesse;
         } else if (!handler.isRight()) {
             velX = 0;
         }
 
         if (handler.isRight()) {
-            velX = 5;
+            velX = 5 * vitesse;
         } else if (!handler.isLeft()) {
             velX = 0;
         }
 
-        x = SepGame.clamp(x, 0 + 16, SepGame.WIDTH - 17);
-        y = SepGame.clamp(y, 0 + 16, SepGame.HEIGHT - 17);
+        x += velX;
+        y += velY;
+        x = SepGame.clamp(x, 0 + 16, SepGame.WIDTH - 16 - 1);
+        y = SepGame.clamp(y, 0 + 16, SepGame.HEIGHT - 16 - 1 - 30);
 
         collision();
     }

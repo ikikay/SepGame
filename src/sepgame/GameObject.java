@@ -17,6 +17,7 @@ public abstract class GameObject {
     protected float x, y;
     protected TYPE type;
     protected float velX, velY;
+    protected float vitesse;
 
     protected float life;
     protected float lifeMax;
@@ -27,6 +28,7 @@ public abstract class GameObject {
         this.y = y;
         this.type = type;
 
+        this.vitesse = 1;
         this.life = 100;
         this.lifeMax = this.life;
         this.shield = 0;
@@ -78,6 +80,14 @@ public abstract class GameObject {
         return velY;
     }
 
+    public float getVitesse() {
+        return vitesse;
+    }
+
+    public void setVitesse(float vitesse) {
+        this.vitesse = vitesse;
+    }
+
     public float getLife() {
         return life;
     }
@@ -103,6 +113,6 @@ public abstract class GameObject {
     }
 
     public float getPourcentLife() {
-        return this.life * 100 / this.lifeMax; 
+        return this.life * 100 / this.lifeMax;
     }
 }
