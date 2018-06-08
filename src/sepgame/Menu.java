@@ -61,14 +61,18 @@ public class Menu extends MouseAdapter {
             g.drawRect(210, 350, 200, 64);
             g.drawString("Retour", 280, 390);
         } else if (game.gameState == STATE.Fin) {
-            g.drawString("Game Over", 240, 50);
+            g.drawString("Game Over", 200, 50);
 
             g.setFont(fntPetit);
-            g.drawString("Tu as perdu avec un score de : ", 100, 200);
+            g.drawString("Tu as perdu au niveau: ", 175, 200);
+            g.drawString(String.valueOf(Hud.level), 275, 225);
+
+            g.drawString("avec un score de : ", 175, 250);
+            g.drawString(String.valueOf(Hud.score), 275, 275);
 
             g.setFont(fntmoyen);
             g.drawRect(210, 350, 200, 64);
-            g.drawString("Menu (Essayez encore)", 280, 390);
+            g.drawString("Menu", 280, 390);
         }
     }
 
@@ -86,10 +90,10 @@ public class Menu extends MouseAdapter {
 //                for (int i = 0; i < 15; i++) {
 //                    handler.addObject(new BasicEnemy(r.nextInt(WIDTH - 16), r.nextInt(HEIGHT - 16), TYPE.BasicEnemy, handler));
 //                }
-            // Aide
+                // Aide
             } else if (mouseOver(mx, my, 210, 250, 200, 64)) {
                 game.gameState = STATE.Aide;
-            // Quitter
+                // Quitter
             } else if (mouseOver(mx, my, 210, 350, 200, 64)) {
                 System.exit(1);
                 return;
@@ -102,9 +106,10 @@ public class Menu extends MouseAdapter {
         } else if (game.gameState == STATE.Fin) {
             // Retour
             if (mouseOver(mx, my, 210, 350, 200, 64)) {
+                SepGame.resetGame();
                 game.gameState = STATE.Menu;
-            }
-        }
+            } 
+       }
     }
 
     private Boolean mouseOver(int mx, int my, int x, int y, int width, int height) {

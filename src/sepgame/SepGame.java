@@ -24,6 +24,7 @@ public class SepGame extends Canvas implements Runnable {
     private final double UPDATE_CAP = 1.0 / 60.0;
 
     private Menu menu;
+    private Hud hud;
 
     public enum STATE {
         Menu,
@@ -49,11 +50,7 @@ public class SepGame extends Canvas implements Runnable {
         new Window(WIDTH + 6, HEIGHT + 28, "SEP Game", this);
         menu = new Menu(this, handler);
         this.addMouseListener(menu);
-
-        System.out.println(gameState);
-        if (gameState == STATE.Menu) {
-            //Décoration
-        }
+        hud = new Hud(handler);
     }
 
     public synchronized void start() {
@@ -75,7 +72,7 @@ public class SepGame extends Canvas implements Runnable {
     public void run() {
         this.requestFocus();
 
-        // Majoolwip
+        // Majoolwip, 60 FPS
         running = true;
         System.out.println("");
 
@@ -135,13 +132,12 @@ public class SepGame extends Canvas implements Runnable {
         if (gameState == STATE.Menu) {
             menu.tick();
         } else if (gameState == STATE.Jeu) {
-            //hud.tick();
+            hud.tick();
             //spawner.tick();
-//            if (HUD.HEALTH <= 0) {
-//                HUD.HEALTH = 100;
-//                gameState = STATE.Fin;
-//                handler.object.clear();
-//            }
+            if (Hud.playerLifePourcent == 0) {                             
+                gameState = STATE.Fin;
+                handler.object.clear();
+            }
         }
     }
 
@@ -162,7 +158,7 @@ public class SepGame extends Canvas implements Runnable {
         if ((gameState == STATE.Menu) || (gameState == STATE.Aide) || (gameState == STATE.Fin)) {
             menu.render(g);
         } else if (gameState == STATE.Jeu) {
-            //hud.render(g);
+            hud.render(g);
         }
 
         //Pour TESTS pour centre ecran
@@ -188,5 +184,11 @@ public class SepGame extends Canvas implements Runnable {
         } else {
             return position;
         }
+    }
+    
+    public static void resetGame(){
+        Hud.level = 1;
+        Hud.score = 0;
+        Hud.playerLifePourcent = 100;
     }
 }

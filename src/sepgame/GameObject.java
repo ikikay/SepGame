@@ -18,10 +18,18 @@ public abstract class GameObject {
     protected TYPE type;
     protected float velX, velY;
 
+    protected float life;
+    protected float lifeMax;
+    protected float shield;
+
     public GameObject(float x, float y, TYPE type) {
         this.x = x;
         this.y = y;
         this.type = type;
+
+        this.life = 100;
+        this.lifeMax = this.life;
+        this.shield = 0;
     }
 
     public abstract void tick();
@@ -68,5 +76,33 @@ public abstract class GameObject {
 
     public float getVelY() {
         return velY;
+    }
+
+    public float getLife() {
+        return life;
+    }
+
+    public void setLife(float life) {
+        this.life = life;
+    }
+
+    public float getShield() {
+        return shield;
+    }
+
+    public void setShield(float shield) {
+        this.shield = shield;
+    }
+
+    public float getLifeMax() {
+        return lifeMax;
+    }
+
+    public void setLifeMax(float lifeMax) {
+        this.lifeMax = lifeMax;
+    }
+
+    public float getPourcentLife() {
+        return this.life * 100 / this.lifeMax; 
     }
 }
