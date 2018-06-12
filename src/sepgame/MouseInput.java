@@ -34,6 +34,7 @@ public class MouseInput extends MouseAdapter {
 
                 if (tempObject.getType() == TYPE.Player) {
                     // Todo au clique
+                     handler.addObject(new Bullet(tempObject.getX() + 16, tempObject.getY() + 16, TYPE.Bullet, handler, mx, my));
                 }
             }
         }

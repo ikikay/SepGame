@@ -10,5 +10,6 @@ package sepgame;
  * @author lulambert
  */
 public enum TYPE {
-    Player()
+    Player(),
+    Bullet()
 }
